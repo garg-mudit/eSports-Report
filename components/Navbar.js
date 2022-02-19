@@ -4,13 +4,13 @@ import { useContext } from "react";
 import AuthContext from "../stores/authContext";
 
 export default function Navbar() {
-  const { user, login } = useContext(AuthContext);
+  const { user, login, logout } = useContext(AuthContext);
   console.log(user, login);
   return (
     <div className="container">
       <nav>
         <Image src="/logo.svg" width={50} height={48} />
-        <h1>eSports Report</h1>
+        <h1>eSports Reporter</h1>
         <ul>
           <li>
             <Link href="/">
@@ -27,9 +27,15 @@ export default function Navbar() {
               <a>Reports</a>
             </Link>
           </li>
-          <li onClick={login} className="btn">
-            Login/Signup
-          </li>
+          {user == null ? (
+            <li onClick={login} className="btn">
+              Login/Signup
+            </li>
+          ) : (
+            <li onClick={logout} className="btn">
+              Logout
+            </li>
+          )}
         </ul>
       </nav>
       <div className="banner">
